@@ -13,7 +13,6 @@ from paragraphs import which_para
 
 Window.maximize()
 
-
 kv = '''
 MDFloatLayout:
     ScreenManager:
@@ -194,7 +193,6 @@ MDFloatLayout:
                         app.set_time()
                         scr.current= "main"
                         
-                    
         Screen:
             name: "main"
             MDFloatLayout:
@@ -275,20 +273,16 @@ MDFloatLayout:
 '''
 
 
-class SplashBar (CommonElevationBehavior, MDFloatLayout):
+class SplashBar(CommonElevationBehavior, MDFloatLayout):
     pass
 
 
-class StartBar (CommonElevationBehavior, MDFloatLayout):
+class StartBar(CommonElevationBehavior, MDFloatLayout):
     pass
-
-
 
 
 class Velocity(MDApp):
-    # para = "Sir Tristram, violer d'amores, fr'over the short sea, had passencore rearrived from North Armorica on this side the scraggy isthmus of Europe Minor to wielderfight his penisolate war: nor had topsawyer's rocks by the stream Oconee exaggerated themselse to Laurens County's gorgios while they went doublin their mumper all the time: nor avoice from afire bellowsed mishe mishe to tauftauf thuartpeatrick: not yet, though venissoon after, had a kidscad buttended a bland old isaac: not yet, though all's fair in vanessy, were sosie sesthers wroth with twone nathandjoe."
     para = ""
-    # para = "Computer science is a field of study that involves the design, development, and analysis of computer systems and software. It is a broad and rapidly evolving field that encompasses a wide range of topics, including programming languages, algorithms, data structures, artificial intelligence, databases, networks, securitymore."
     color = ListProperty((86 / 225, 150 / 255, 79 / 255, 1))
     index = 1
     incorrect = []
@@ -296,8 +290,7 @@ class Velocity(MDApp):
     time = 60
     timeleft = 60
     isTyped = False
-    typed =[]
-    #count =0
+    typed = []
 
     def build(self):
         self.icon = "fast.png"
@@ -309,10 +302,10 @@ class Velocity(MDApp):
         self.root.ids.time_left.text = f"Time Left : {self.timeleft}"
 
     def spinner_click(self, value):
-        parag = which_para(value)
-        self.para = parag
-        self.root.ids.para_area.text = parag
-        self.root.ids.para_content.text = parag
+        paragraph = which_para(value)
+        self.para = paragraph
+        self.root.ids.para_area.text = paragraph
+        self.root.ids.para_content.text = paragraph
         self.root.ids.para_content.cursor = (0, 0)
 
     def check(self, text):
@@ -326,7 +319,6 @@ class Velocity(MDApp):
                 self.index = self.root.ids.typing_area.cursor[0]
 
                 if self.index > 0:
-                    print(f"index{self.index}, typed{self.typed}")
                     try:
                         self.typed.pop()
                     except IndexError:
@@ -340,16 +332,8 @@ class Velocity(MDApp):
                 if self.index in self.incorrect:
                     self.incorrect.remove(self.index)
                     self.mistakes -= 1
-                print(f"Index{self.index}")  
-                print(f"len(typed){len(self.typed)}")
-                print(f"typed){self.typed}")     
 
-                if self.index < (len(self.typed)-1):
-                    print(f"cursor{self.index}, length{len(self.typed)}")
-                    print(f"mistakes{self.mistakes}, incorrect{self.incorrect}")
-                    print(f"mistakes{self.mistakes}, incorrect{self.incorrect}")
-                    print("antada select akkano nenekk?outside")
-
+                if self.index < (len(self.typed) - 1):
                     def on_ok_3(button_widget):
                         self.index = 0
                         self.typed.clear()
@@ -381,13 +365,9 @@ class Velocity(MDApp):
                         self.typed.clear()
 
                     self.typed.append(i)
-                    #print(f"typed){self.typed}")
-                count = 0    
+                count = 0
 
-                if self.index < (len(self.typed)-1):
-                    print(f"cursor{self.index}, length{len(self.typed)}")
-                    print("antada select akkano nenekk?")
-
+                if self.index < (len(self.typed) - 1):
                     def on_ok_1(button_widget):
                         self.index = 0
                         self.typed.clear()
@@ -404,8 +384,6 @@ class Velocity(MDApp):
 
                 try:
                     if self.para[self.index] == self.typed[self.index]:
-                        #print(f"Para: {self.para[self.index]}, Type: {typed[self.index]}")
-                        #print(f"Incorrect{self.incorrect}")
                         if not self.incorrect:
                             self.color = (86 / 225, 150 / 255, 79 / 255, 1)
                     else:
@@ -414,26 +392,6 @@ class Velocity(MDApp):
                         self.incorrect.append(self.index)
 
                     self.index += 1
-
-                    # while keyboard.is_pressed("backspace"):
-                    #     self.index = self.root.ids.typing_area.cursor[0]
-                    #
-                    #     if self.index > 0:
-                    #         self.index -= 1
-                    #
-                    #     else:
-                    #         self.index = 0
-                    #
-                    #     if self.index in self.incorrect:
-                    #         self.incorrect.remove(self.index)
-                    #         self.mistakes -= 1
-                    #
-                    #     print(f"Index{self.index}")
-                    #     print(f"len(typed){len(self.typed)}")
-                    #
-                    #     if self.index < (len(self.typed) - 1):
-                    #         print(f"cursor{self.index}, length{len (self.typed)}")
-                    #         print("antada select akkano nenekk? inside w")
 
                 except IndexError:
                     self.root.ids.typing_area.disabled = True
@@ -484,8 +442,8 @@ class Velocity(MDApp):
 
             time_up = MDDialog(title="Time Up!", text=f"Data Left:{para_left}     {mist}          {word_pm} ",
                                buttons=[MDFlatButton(text="OK", theme_text_color="Custom",
-                                                      text_color=self.theme_cls.primary_color,
-                                                      on_release=on_time_up)],
+                                                     text_color=self.theme_cls.primary_color,
+                                                     on_release=on_time_up)],
                                auto_dismiss=False)
             time_up.open()
             self.root.ids.time_left.text = f"Data Left: {para_left}"
@@ -505,9 +463,8 @@ class Velocity(MDApp):
 
 
 if __name__ == "__main__":
-
-    LabelBase.register (name="Poppins",
-                        fn_regular="Poppins-Regular.ttf")
-    LabelBase.register (name="BPoppins",
-                        fn_regular="Poppins-SemiBold.ttf")
-    Velocity().run ()
+    LabelBase.register(name="Poppins",
+                       fn_regular="Poppins-Regular.ttf")
+    LabelBase.register(name="BPoppins",
+                       fn_regular="Poppins-SemiBold.ttf")
+    Velocity().run()
