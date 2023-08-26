@@ -5,7 +5,7 @@ from kivy.core.window import Window
 from kivy.properties import ListProperty
 import keyboard
 from kivy.clock import Clock
-from kivymd.uix.behaviors import CommonElevationBehavior, FakeRectangularElevationBehavior
+from kivymd.uix.behaviors import CommonElevationBehavior
 from kivymd.uix.dialog import MDDialog
 from kivymd.uix.button import MDFlatButton
 from kivymd.uix.floatlayout import MDFloatLayout
